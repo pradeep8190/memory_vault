@@ -6,13 +6,12 @@
    App Header (Upper Head)
    -------------------------------------------------------------------------- */
 .app-header {
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;
+  flex-shrink: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 100;
   background-color: #ffffff;
-  padding: 24px 16px 8px;
+  padding: max(12px, env(safe-area-inset-top, 12px)) 16px 4px;
   display: flex;
   flex-direction: column;
   user-select: none;

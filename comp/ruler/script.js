@@ -83,17 +83,17 @@
     initialValue: 2024,
     pixelsPerYear: 92.0,    // Generous horizontal spacing per year for comfortable scrolling
     ticksPerYear: 4,        // 4 divisions per year (quarterly ticks: 23px apart)
-    minTickHeight: 7.0,     // Resting height of edge ticks
-    baseMaxTickHeight: 46,  // Peak height at center needle
-    speedAmpBonus: 12,      // Dynamic swell with kinetic energy
-    baseBellSpread: 42,     // Wave spread in pixels around center needle
-    speedSpreadBonus: 10,   // Spread expansion with speed
+    minTickHeight: 6.0,     // Resting height of edge ticks
+    baseMaxTickHeight: 38,  // Peak height at center needle
+    speedAmpBonus: 8,       // Dynamic swell with kinetic energy
+    baseBellSpread: 40,     // Wave spread in pixels around center needle
+    speedSpreadBonus: 8,    // Spread expansion with speed
     needleWidth: 2.2,       // Crisp center needle width
     needleColor: '#ff3b30', // Vibrant Precision Red Pointer
     tickWidth: 1.15,
     labelSpread: 56,
-    baselineOffset: 48,
-    labelOffset: 20
+    baselineOffset: 38,
+    labelOffset: 16
   };
 
   const totalYears = CONFIG.maxYear - CONFIG.minYear;

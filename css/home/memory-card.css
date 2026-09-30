@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Memory Photo Display Stylesheet
+   YouTube-Style Reactive Ambient Glow (Pixel-Sampled Backlight) & Optical Dissolve
+   ========================================================================== */
+
+.memory-showcase {
+  width: 100%;
+  max-width: 388px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Quiet Minimal Editorial Header (Single Soft Line, 400-weight typography)
+   -------------------------------------------------------------------------- */
+.memory-meta-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 24px;
+  margin-bottom: 12px;
+  pointer-events: none;
+}
+
+.memory-meta-line {
+  font-size: 13.5px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #7c7c82;
+  opacity: 1;
+  transition: opacity 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.memory-meta-fade {
+  opacity: 0 !important;
+}
+
+.memory-glow-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   YouTube Ambient Mode: Reactive Chromatic Optical Backlight
+   Samples actual corner pixels of the image, blurred and saturated
+   -------------------------------------------------------------------------- */
+.ambient-glow-stage {
+  position: absolute;
+  top: 14px;
+  left: 8px;
+  right: 8px;
+  bottom: -10px;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 36px;
+  overflow: visible;
+  transform: translateZ(0);
+}
+
+.glow-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  /* Deep Gaussian blur + vibrant chromatic saturation */
+  filter: blur(38px) saturate(2.6) brightness(1.12);
+  opacity: 0;
+  transform: scale(0.97) translateZ(0);
+  will-change: opacity, filter;
+  transition: 
+    opacity 0.48s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.48s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glow-layer.glow-active {
+  opacity: 0.65 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Main Photo Card Frame
+   -------------------------------------------------------------------------- */
+.memory-photo-card {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 310px;
+  border-radius: 30px;
+  background: #111317;
+  overflow: hidden;
+  border: none;
+  /* Replaced harsh black shadow with soft whisper contact shadow */
+  box-shadow: 
+    0 12px 28px -8px rgba(0, 0, 0, 0.10),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+/* Double-Buffered Layered Images */
+.memory-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  will-change: transform, filter, opacity;
+  transform-origin: center center;
+}
+
+/* Optical Rack-Focus Dissolve */
+.layer-active {
+  opacity: 1 !important;
+  transform: scale(1) translate3d(0, 0, 0) !important;
+  filter: blur(0px) brightness(1) saturate(1) !important;
+  z-index: 2;
+  transition: 
+    transform 0.44s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.40s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.34s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.layer-outgoing {
+  opacity: 0 !important;
+  transform: scale(0.96) translate3d(0, 0, 0) !important;
+  filter: blur(14px) brightness(0.95) !important;
+  z-index: 1;
+  transition: 
+    transform 0.44s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.40s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.36s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.layer-incoming {
+  opacity: 0;
+  transform: scale(1.05) translate3d(0, 0, 0);
+  filter: blur(20px) brightness(1.12);
+  z-index: 2;
+}
+
+/* Optical Shutter Bloom Sheen */
+.shutter-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  mix-blend-mode: overlay;
+  transition: opacity 0.30s ease;
+}
+
+.shutter-flash.flashing {
+  opacity: 1;
+  transition: opacity 0.06s ease;
+}

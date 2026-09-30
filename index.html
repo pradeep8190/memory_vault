@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Memory Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/home/header.css">
+  <link rel="stylesheet" href="css/home/memory-card.css">
+  <link rel="stylesheet" href="css/home/ruler.css">
+  <link rel="stylesheet" href="css/home/tab-bar.css">
+  <link rel="stylesheet" href="css/detail/detail.css">
+</head>
+<body>
+
+  <!-- Mobile Phone Container -->
+  <div class="phone-viewport">
+
+    <!-- Upper Head: Pure CSS Precision Glass Search Bar -->
+    <header class="app-header">
+      <div class="search-bar-frame" id="searchBarFrame">
+
+        <!-- Search Icon -->
+        <div class="search-icon-wrapper">
+          <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </div>
+
+        <!-- Native Interactive Search Input -->
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput" 
+          placeholder="Search memories, trips, tags..." 
+          autocomplete="off" 
+          spellcheck="false"
+        />
+
+        <!-- Action Buttons -->
+        <div class="search-actions">
+          <button class="clear-btn" id="clearBtn" type="button" aria-label="Clear Search Input">
+            <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area: Upper Memory Photo Card + Lower Ruler Scrubber -->
+    <main class="app-content">
+
+      <!-- Upper Side: Memory Photo Display with Dynamic YouTube-Style Ambient Glow -->
+      <section class="memory-showcase">
+        <!-- Quiet Single-Line Editorial Meta (Populated dynamically via JS) -->
+        <div class="memory-meta-header" id="memoryMetaHeader">
+          <span class="memory-meta-line" id="memoryMetaLine"></span>
+        </div>
+
+        <div class="memory-glow-container">
+          <!-- Real-Time Ambient Light Field (Pixel-Reactive Backlight) -->
+          <div class="ambient-glow-stage" id="ambientGlowStage">
+            <img class="glow-layer glow-active" id="glowLayerA" src="assets/images/photo-01.png" alt="Ambient Light A" />
+            <img class="glow-layer" id="glowLayerB" src="" alt="Ambient Light B" />
+          </div>
+
+          <!-- Main Sharp Photo Card -->
+          <div class="memory-photo-card" id="memoryCard">
+            <img class="memory-layer layer-active" id="imgLayerA" src="assets/images/photo-01.png" alt="Memory Photo Layer A" />
+            <img class="memory-layer" id="imgLayerB" src="" alt="Memory Photo Layer B" style="opacity: 0;" />
+            <div class="shutter-flash" id="shutterFlash"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lower Side: Tactile Year Ruler Scrubber (2008 - 2026) -->
+      <div class="ruler-container" id="rulerContainer" tabindex="0" role="slider" aria-label="Year ruler" aria-valuemin="2008" aria-valuemax="2026" aria-valuenow="2024">
+        <canvas id="rulerCanvas"></canvas>
+      </div>
+
+    </main>
+
+    <!-- Bottom Navigation: Liquid Glass Tab Bar -->
+    <footer class="app-tab-bar" id="tabBarStage">
+      <canvas id="tabBarCanvas"></canvas>
+    </footer>
+
+    <!-- Memory Detail WebGL Canvas & Floating Overlay UI -->
+    <canvas id="memoryDetailCanvas"></canvas>
+    <div class="memory-detail-ui" id="memoryDetailUI">
+      <div class="detail-drag-handle"></div>
+      <button class="detail-close-btn" id="detailCloseBtn" type="button" aria-label="Close detail view">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Component Scripts -->
+  <script src="comp/ruler/script.js"></script>
+  <script src="comp/memory-detail/detail-shaders.js"></script>
+  <script src="comp/memory-detail/detail-app.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/memory-card.js"></script>
+  <script type="module" src="js/tab-bar.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

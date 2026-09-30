@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Memory Detail WebGL Overlay Stylesheet
+   Adapts cleanly over the phone viewport
+   ========================================================================== */
+
+/* The interactive memory photo card cursor hint */
+.memory-photo-card {
+  cursor: zoom-in;
+  transition: transform 0.24s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.24s ease;
+}
+
+.memory-photo-card:active {
+  transform: scale(0.985);
+}
+
+/* Full-Viewport WebGL Layer */
+#memoryDetailCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  pointer-events: none;
+  cursor: zoom-out;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#memoryDetailCanvas.active {
+  pointer-events: auto;
+}
+
+/* Minimal Frosted Glass Detail UI (Drag Bar + Close Button) */
+.memory-detail-ui {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 100%;
+  z-index: 2050;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.memory-detail-ui.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Top Grab Handle / Drag Pill */
+.detail-drag-handle {
+  width: 38px;
+  height: 4.5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  margin: 0 auto;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Minimal Circular Frosted Close Pill */
+.detail-close-btn {
+  position: absolute;
+  right: 18px;
+  top: -2px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(30, 30, 34, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease;
+}
+
+.detail-close-btn:active {
+  transform: scale(0.92);
+  background: rgba(50, 50, 56, 0.85);
+}

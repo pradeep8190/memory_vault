@@ -19,37 +19,50 @@
   <!-- Mobile Phone Container -->
   <div class="phone-viewport">
 
-    <!-- Upper Head: Pure CSS Precision Glass Search Bar -->
+    <!-- Upper Head: Header with Liquid Glass Search Bar -->
     <header class="app-header">
-      <div class="search-bar-frame" id="searchBarFrame">
+      <div class="header-search-stage" id="stageContainer">
+        <!-- GPU Optical Shader Canvas (Liquid Glass Refraction) -->
+        <canvas id="glcanvas"></canvas>
 
-        <!-- Search Icon -->
-        <div class="search-icon-wrapper">
-          <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="7.5"></circle>
-            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
-          </svg>
+        <!-- Dynamic 2D Background Rasterizer -->
+        <canvas id="bgCanvas"></canvas>
+
+        <!-- Composited Search Bar Interactive UI -->
+        <div class="search-ui-container" id="searchUIContainer">
+          <div class="search-bar-frame" id="searchBarFrame">
+            <!-- Search Icon -->
+            <div class="search-icon-wrapper">
+              <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7.5"></circle>
+                <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+              </svg>
+            </div>
+
+            <!-- Native Interactive Search Input -->
+            <input 
+              type="text" 
+              class="search-input" 
+              id="searchInput" 
+              placeholder="Search memories, trips, tags..." 
+              autocomplete="off" 
+              spellcheck="false"
+            />
+
+            <!-- Action Buttons -->
+            <div class="search-actions">
+              <button class="clear-btn" id="clearBtn" type="button" aria-label="Clear Search Input">
+                <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- Native Interactive Search Input -->
-        <input 
-          type="text" 
-          class="search-input" 
-          id="searchInput" 
-          placeholder="Search memories, trips, tags..." 
-          autocomplete="off" 
-          spellcheck="false"
-        />
-
-        <!-- Action Buttons -->
-        <div class="search-actions">
-          <button class="clear-btn" id="clearBtn" type="button" aria-label="Clear Search Input">
-            <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
+        <!-- Touch Overlay for Background Interaction -->
+        <div class="touch-overlay" id="touchOverlay"></div>
       </div>
     </header>
 
@@ -106,6 +119,8 @@
   </div>
 
   <!-- Component Scripts -->
+  <script src="comp/search-bar/search-shaders.js"></script>
+  <script src="comp/search-bar/search-app.js"></script>
   <script src="comp/ruler/script.js"></script>
   <script src="comp/memory-detail/detail-shaders.js"></script>
   <script src="comp/memory-detail/detail-app.js"></script>

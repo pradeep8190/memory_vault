@@ -1,6 +1,25 @@
 /* ==========================================================================
-   Header Component Stylesheet — Clean Minimalist Search Pill
+   Header Component Stylesheet
+   Imports Liquid Glass Search Bar & adapts exclusively for Mobile Phone UI
    ========================================================================== */
+
+/* Import search bar component styles without rewriting */
+@import url('../../comp/search-bar/search-style.css');
+
+/* --------------------------------------------------------------------------
+   Reset showcase & body overrides to pure white & maintain 100dvh lock
+   -------------------------------------------------------------------------- */
+html, body {
+  background-color: #ffffff !important;
+  display: block !important;
+  height: 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  overflow: hidden !important;
+  position: fixed !important;
+  inset: 0 !important;
+  -webkit-tap-highlight-color: transparent;
+}
 
 /* --------------------------------------------------------------------------
    App Header (Upper Head)
@@ -11,122 +30,88 @@
   width: 100%;
   z-index: 100;
   background-color: #ffffff;
-  padding: max(12px, env(safe-area-inset-top, 12px)) 16px 4px;
+  padding: max(10px, env(safe-area-inset-top, 10px)) 16px 2px;
   display: flex;
   flex-direction: column;
   user-select: none;
   -webkit-user-select: none;
 }
 
-/* --------------------------------------------------------------------------
-   Clean Minimal Search Pill
-   -------------------------------------------------------------------------- */
-.search-bar-frame {
+/* Search Stage Inside Header */
+.header-search-stage {
   position: relative;
   width: 100%;
-  max-width: 396px;
-  height: 48px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-radius: 9999px;
-  background: rgba(120, 120, 128, 0.09);
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: none;
-  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
-  touch-action: manipulation;
-  overflow: hidden;
-}
-
-/* Touch active state */
-.search-bar-frame:active,
-.search-bar-frame.pressed {
-  transform: scale(0.985);
-  background: rgba(120, 120, 128, 0.14);
-}
-
-/* Focused state */
-.search-bar-frame:focus-within {
-  background: #ffffff;
-  border-color: rgba(0, 113, 227, 0.45);
-  box-shadow: 
-    0 4px 16px -2px rgba(0, 0, 0, 0.06),
-    0 0 0 3px rgba(0, 113, 227, 0.12);
-}
-
-/* --------------------------------------------------------------------------
-   Search Icon & Input Field
-   -------------------------------------------------------------------------- */
-.search-icon-wrapper {
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  color: #8e8e93;
-  flex-shrink: 0;
-  pointer-events: none;
-  transition: color 0.18s ease;
+  background-color: #ffffff;
+  overflow: hidden;
 }
 
-.search-bar-frame:focus-within .search-icon-wrapper {
-  color: #0071e3;
-}
-
-.search-icon-svg {
-  width: 18px;
-  height: 18px;
-}
-
-.search-input {
-  flex: 1;
+/* Ensure WebGL canvas and background canvas span the header stage */
+.header-search-stage #glcanvas,
+.header-search-stage #bgCanvas,
+.header-search-stage .touch-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: inherit;
-  font-size: 15.5px;
-  font-weight: 450;
-  color: #1c1c1e;
-  letter-spacing: -0.2px;
+}
+
+.header-search-stage .touch-overlay {
+  z-index: 5;
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Phone UI Adaptations (No Hover Logic — Touch Native)
+   -------------------------------------------------------------------------- */
+
+/* Disable desktop hover effects completely */
+.search-bar-frame:hover {
+  cursor: default;
+}
+
+.clear-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: #555e70;
+  transform: none;
+}
+
+/* Touch-native active state */
+.search-bar-frame:active {
+  transform: scale(0.985);
+}
+
+.clear-btn:active {
+  background: rgba(0, 0, 0, 0.16);
+  transform: scale(0.92);
+}
+
+/* Hide desktop keyboard shortcut badge on phone (no ⌘K on phones) */
+.shortcut-badge {
+  display: none !important;
+}
+
+/* Mobile search input tuning */
+.search-input {
+  font-size: 16px; /* Prevents auto-zoom on mobile Safari */
+  font-weight: 500;
+  color: #111317;
   -webkit-appearance: none;
   appearance: none;
 }
 
 .search-input::placeholder {
-  color: #8e8e93;
-  font-weight: 400;
+  color: rgba(55, 60, 72, 0.65);
+  font-weight: 440;
 }
 
-/* --------------------------------------------------------------------------
-   Action Buttons (Clear Button)
-   -------------------------------------------------------------------------- */
-.search-actions {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-
+/* Clear button touch target */
 .clear-btn {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: none;
-  background: rgba(120, 120, 128, 0.25);
-  color: #ffffff;
-  cursor: pointer;
-  outline: none;
-  transition: transform 0.15s ease, background-color 0.15s ease;
+  width: 26px;
+  height: 26px;
   touch-action: manipulation;
-}
-
-.clear-btn:active {
-  transform: scale(0.88);
-  background: rgba(120, 120, 128, 0.45);
 }
